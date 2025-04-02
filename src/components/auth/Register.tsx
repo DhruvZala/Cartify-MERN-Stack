@@ -226,7 +226,7 @@ const Register: React.FC = () => {
                 />
                 <button
                   type="button"
-                  className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 hover:text-indigo-600 transition-colors duration-200"
+                  className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 hover:text-indigo-600 transition-colors duration-200 cursor-pointer"
                   onClick={() => setPasswordVisible(!passwordVisible)}
                   disabled={isSubmitting}
                 >
@@ -260,7 +260,7 @@ const Register: React.FC = () => {
                   value={formik.values.confirmPassword}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  className={`w-full px-4 py-3 pr-12 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition duration-200 ${
+                  className={`w-full px-4 py-3 pr-12 border rounded-lg  focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition duration-200 ${
                     formik.touched.confirmPassword &&
                     formik.errors.confirmPassword
                       ? "border-red-500"
@@ -271,7 +271,7 @@ const Register: React.FC = () => {
                 />
                 <button
                   type="button"
-                  className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 hover:text-indigo-600 transition-colors duration-200"
+                  className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 hover:text-indigo-600 transition-colors duration-200 cursor-pointer"
                   onClick={() =>
                     setConfirmPasswordVisible(!confirmPasswordVisible)
                   }
@@ -298,7 +298,7 @@ const Register: React.FC = () => {
               className={`w-full px-4 py-3 text-lg font-medium text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors duration-200 shadow-md hover:shadow-lg ${
                 isSubmitting
                   ? "bg-indigo-400 cursor-not-allowed"
-                  : "bg-indigo-600 hover:bg-indigo-700"
+                  : "bg-indigo-600 hover:bg-indigo-700 cursor-pointer"
               }`}
             >
               {isSubmitting ? (

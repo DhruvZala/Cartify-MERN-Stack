@@ -17,7 +17,7 @@ const Navbar: React.FC<NavbarProps> = ({ cartCount }) => {
     localStorage.removeItem("name");
     localStorage.removeItem("password");
     document.cookie =
-      "jwtToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      "jwtToken=;  path=/;";
     window.location.reload();
   };
 
@@ -44,13 +44,13 @@ const Navbar: React.FC<NavbarProps> = ({ cartCount }) => {
             <div className="flex gap-1 text-xs sm:text-sm md:text-base">
               {isLoggedIn ? (
                 <>
-                  <span className="font-medium text-gray-700 hover:text-blue-600 transition-colors duration-200 px-2 py-1 rounded-md hover:bg-blue-50">
+                  <span className="font-medium text-gray-700 hover:text-blue-600 transition-colors duration-200 px-2 py-1 rounded-md hover:bg-blue-50 cursor-pointer">
                     {userName || userEmail}
                   </span>
                   <span className="text-gray-300">|</span>
                   <button
                     onClick={handleLogout}
-                    className="font-medium text-gray-700 hover:text-blue-600 transition-colors duration-200 px-2 py-1 rounded-md hover:bg-blue-50"
+                    className="font-medium text-gray-700 hover:text-blue-600 transition-colors duration-200 px-2 py-1 rounded-md hover:bg-blue-50 cursor-pointer"
                   >
                     Logout
                   </button>
@@ -77,20 +77,34 @@ const Navbar: React.FC<NavbarProps> = ({ cartCount }) => {
         </div>
 
         <div className="relative group">
-          <Link
-            to="/Cart"
-            className="p-1 sm:p-2 rounded-full hover:bg-blue-50 transition-colors duration-200 flex items-center justify-center"
-          >
-            <ShoppingCart
-              size={20}
-              className="text-gray-700 group-hover:text-blue-600 transition-colors duration-200"
-            />
-            {cartCount > 0 && (
-              <div className="absolute -top-1 -right-1 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center transform group-hover:scale-110 transition-transform duration-200 shadow-sm">
-                {cartCount}
-              </div>
-            )}
-          </Link>
+          {isLoggedIn ? (
+            <Link
+              to="/Cart"
+              className="p-1 sm:p-2 rounded-full hover:bg-blue-50 transition-colors duration-200 flex items-center justify-center"
+            >
+              <ShoppingCart
+                size={20}
+                className="text-gray-700 group-hover:text-blue-600 transition-colors duration-200"
+              />
+              {cartCount > 0 && (
+                <div className="absolute -top-1 -right-1 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center transform group-hover:scale-110 transition-transform duration-200 shadow-sm">
+                  {cartCount}
+                </div>
+              )}
+            </Link>
+          ) : (
+            <div className="p-1 sm:p-2 rounded-full flex items-center justify-center cursor-not-allowed opacity-50 relative">
+              <ShoppingCart size={20} className="text-gray-700" />
+              {cartCount > 0 && (
+                <div className="absolute -top-1 -right-1 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center shadow-sm">
+                  {cartCount}
+                </div>
+              )}
+              <span className="absolute -bottom-7 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs rounded px-2 py-1 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                Please login to access cart
+              </span>
+            </div>
+          )}
         </div>
       </div>
     </div>

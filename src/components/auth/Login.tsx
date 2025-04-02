@@ -160,7 +160,7 @@ const Login: React.FC = () => {
                 />
                 <button
                   type="button"
-                  className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 hover:text-indigo-600 transition-colors duration-200"
+                  className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 hover:text-indigo-600 transition-colors duration-200 cursor-pointer"
                   onClick={() => setPasswordVisible(!passwordVisible)}
                 >
                   {passwordVisible ? (
@@ -188,7 +188,7 @@ const Login: React.FC = () => {
 
             <button
               type="submit"
-              className="w-full px-4 py-3 text-lg font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors duration-200 shadow-md hover:shadow-lg"
+              className="w-full px-4 py-3 text-lg font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors duration-200 shadow-md hover:shadow-lg cursor-pointer"
             >
               Sign in
             </button>

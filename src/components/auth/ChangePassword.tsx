@@ -169,9 +169,9 @@ const ChangePassword: React.FC = () => {
                 onClick={() => togglePasswordVisibility("current")}
               >
                 {showPassword.current ? (
-                  <EyeOff className="w-5 h-5" />
+                  <EyeOff className="w-5 h-5 cursor-pointer" />
                 ) : (
-                  <Eye className="w-5 h-5" />
+                  <Eye className="w-5 h-5 cursor-pointer" />
                 )}
               </button>
             </div>
@@ -212,9 +212,9 @@ const ChangePassword: React.FC = () => {
                 onClick={() => togglePasswordVisibility("new")}
               >
                 {showPassword.new ? (
-                  <EyeOff className="w-5 h-5" />
+                  <EyeOff className="w-5 h-5 cursor-pointer" />
                 ) : (
-                  <Eye className="w-5 h-5" />
+                  <Eye className="w-5 h-5 cursor-pointer" />
                 )}
               </button>
             </div>
@@ -255,9 +255,9 @@ const ChangePassword: React.FC = () => {
                 onClick={() => togglePasswordVisibility("confirm")}
               >
                 {showPassword.confirm ? (
-                  <EyeOff className="w-5 h-5" />
+                  <EyeOff className="w-5 h-5 cursor-pointer" />
                 ) : (
-                  <Eye className="w-5 h-5" />
+                  <Eye className="w-5 h-5 cursor-pointer" />
                 )}
               </button>
             </div>
@@ -271,7 +271,7 @@ const ChangePassword: React.FC = () => {
 
           <button
             type="submit"
-            className="w-full px-4 py-3 text-lg font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors duration-200 shadow-md hover:shadow-lg"
+            className="w-full px-4 py-3 text-lg font-medium cursor-pointer text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors duration-200 shadow-md hover:shadow-lg"
           >
             Update Password
           </button>

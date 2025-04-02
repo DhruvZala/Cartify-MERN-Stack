@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../common/Navbar";
 import Footer from "../common/Footer";
 import { RazorpayPayment } from "../../utils/RazorpayService";
+import { IndianRupee } from "lucide-react";
 
 interface Product {
   id: number;
@@ -68,29 +69,26 @@ const CartPage: React.FC = () => {
   };
 
   const subtotal = cart
-    .reduce((acc, item) => acc + item.price * item.quantity, 0)
+    .reduce((acc, item) => acc + item.price * 20 * item.quantity, 0)
     .toFixed(2);
 
   const cartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
 
   const grandTotal = parseFloat(subtotal);
-  const deliveryCharge = cart.length === 0 || grandTotal >= 100 ? 0 : 5;
-  const discountAmount = (grandTotal * discount) / 100;
-  const totalWithDeliveryAndDiscount = (
-    grandTotal +
-    deliveryCharge -
-    discountAmount
-  ).toFixed(2);
+  const deliveryCharge = cart.length === 0 || grandTotal >= 500 ? 0 : 50; 
+  const discountAmount = (grandTotal * discount) / 100; 
+  const totalWithDeliveryAndDiscount =
+    grandTotal + deliveryCharge - discountAmount;
 
   const handleCheckout = async () => {
     setPaymentError(null);
 
     await RazorpayPayment(
-      parseFloat(totalWithDeliveryAndDiscount),
+      totalWithDeliveryAndDiscount,
       "INR",
       (paymentId: unknown) => {
         alert(`Payment successful! ID: ${paymentId}`);
-        // Cart Itms remove after payment sucess
+
         sessionStorage.removeItem("cart");
         setCart([]);
       },
@@ -175,8 +173,9 @@ const CartPage: React.FC = () => {
                             <h2 className="text-lg font-semibold text-gray-900">
                               {title}
                             </h2>
-                            <p className="mt-1 text-lg font-medium text-indigo-600">
-                              ${price.toFixed(2)}
+                            <p className="mt-1 text-lg font-medium text-indigo-600 flex items-center">
+                              <IndianRupee size={18} />
+                              {(price * 20).toFixed(2)}
                             </p>
                           </div>
 
@@ -228,7 +227,10 @@ const CartPage: React.FC = () => {
                     <div className="space-y-4">
                       <div className="flex justify-between text-base font-medium text-gray-900">
                         <p className="text-xl">Subtotal</p>
-                        <p className="text-xl">${subtotal}</p>
+                        <p className="text-xl flex items-center">
+                          <IndianRupee size={18} />
+                          {subtotal}
+                        </p>
                       </div>
 
                       <div className="flex justify-between">
@@ -240,7 +242,7 @@ const CartPage: React.FC = () => {
                               : "text-gray-900 text-xl"
                           }`}
                         >
-                          {deliveryCharge === 0 ? "FREE" : `$${deliveryCharge}`}
+                          {deliveryCharge === 0 ? "FREE" : `₹${deliveryCharge}`}
                         </p>
                       </div>
 
@@ -249,8 +251,9 @@ const CartPage: React.FC = () => {
                           <p className="text-xl text-gray-600">
                             Discount ({discount}%)
                           </p>
-                          <p className="text-xl text-green-600">
-                            -${discountAmount.toFixed(2)}
+                          <p className="text-xl text-green-600 flex items-center">
+                            -<IndianRupee size={18} />
+                            {discountAmount.toFixed(2)}
                           </p>
                         </div>
                       )}
@@ -320,8 +323,9 @@ const CartPage: React.FC = () => {
 
                       <div className="flex justify-between text-lg font-bold text-gray-900 pt-4 border-t border-gray-200 mt-4">
                         <p className="text-xl">Total</p>
-                        <p className="text-xl">
-                          ${totalWithDeliveryAndDiscount}
+                        <p className="text-xl flex items-center">
+                          <IndianRupee size={18} />
+                          {totalWithDeliveryAndDiscount.toFixed(2)}
                         </p>
                       </div>
 

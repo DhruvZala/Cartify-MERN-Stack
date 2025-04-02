@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Navbar from "../common/Navbar";
 import Footer from "../common/Footer";
@@ -10,9 +10,11 @@ import {
   calculateCartCount,
   updateCartItem,
 } from "../../utils/cartUtils";
+import { IndianRupee } from "lucide-react";
 
 const ProductDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(0);
@@ -30,45 +32,47 @@ const ProductDetailPage: React.FC = () => {
       .catch((error) => {
         console.error("Error fetching product details:", error);
         setLoading(false);
+        navigate("/"); 
       });
 
     const storedCart = getCartFromStorage();
     setCart(storedCart);
     setCartCount(calculateCartCount(storedCart));
-  }, [id]);
+  }, [id, navigate]);
 
   const increaseQuantity = () => {
     if (product) {
-      setQuantity((prev) => {
-        const newQuantity = Math.min(prev + 1, 5);
-        handleUpdateCart(newQuantity);
-        return newQuantity;
-      });
+      setQuantity((prev) => Math.min(prev + 1, 5));
     }
   };
 
   const decreaseQuantity = () => {
-    if (product && quantity > 0) {
-      setQuantity((prev) => {
-        const newQuantity = Math.max(prev - 1, 0);
-        handleUpdateCart(newQuantity);
-        return newQuantity;
-      });
+    if (product) {
+      setQuantity((prev) => Math.max(prev - 1, 0));
     }
   };
 
-  const handleUpdateCart = (newQuantity: number) => {
-    if (product) {
-      const updatedCart = updateCartItem(cart, product, newQuantity);
+  const handleAddToCart = () => {
+    if (product && quantity > 0) {
+      const updatedCart = updateCartItem(cart, product, quantity);
       setCart(updatedCart);
       setCartCount(calculateCartCount(updatedCart));
       saveCartToStorage(updatedCart);
 
-      setMessages((prevMessages) => ({
-        ...prevMessages,
+      setMessages({
+        ...messages,
         [product.id]:
-          newQuantity === 5 ? "Maximum quantity reached for this item." : "",
-      }));
+          quantity === 5
+            ? "Maximum quantity reached for this item."
+            : "Item added to cart successfully!",
+      });
+
+      setTimeout(() => {
+        setMessages({
+          ...messages,
+          [product.id]: "",
+        });
+      }, 3000);
     }
   };
 
@@ -111,7 +115,7 @@ const ProductDetailPage: React.FC = () => {
             removed.
           </p>
           <Link
-            to="/ProductPage"
+            to="/"
             className="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors duration-200 font-medium"
           >
             Browse Products
@@ -130,7 +134,6 @@ const ProductDetailPage: React.FC = () => {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="bg-white rounded-xl shadow-md overflow-hidden">
             <div className="md:flex">
-              {/* Product Image */}
               <div className="md:w-1/2 p-8 flex items-center justify-center bg-gray-50">
                 <img
                   src={product.image}
@@ -139,20 +142,16 @@ const ProductDetailPage: React.FC = () => {
                 />
               </div>
 
-              {/* Product Details */}
               <div className="md:w-1/2 p-8">
                 <div className="flex flex-col h-full">
-                  {/* Category */}
                   <span className="text-sm font-medium text-indigo-600 uppercase tracking-wider">
                     {product.category}
                   </span>
 
-                  {/* Title */}
                   <h1 className="mt-2 text-2xl font-extrabold text-gray-900 sm:text-3xl">
                     {product.title}
                   </h1>
 
-                  {/* Rating */}
                   <div className="mt-3 flex items-center">
                     <div className="flex items-center">
                       {[...Array(5)].map((_, i) => (
@@ -175,14 +174,13 @@ const ProductDetailPage: React.FC = () => {
                     </span>
                   </div>
 
-                  {/* Price */}
                   <div className="mt-4">
-                    <p className="text-3xl font-bold text-gray-900">
-                      ${product.price.toFixed(2)}
+                    <p className="text-3xl font-bold text-gray-900 flex items-center">
+                      <IndianRupee size={20} />
+                      {(product.price * 20).toFixed(2)}
                     </p>
                   </div>
 
-                  {/* Description */}
                   <div className="mt-6">
                     <h3 className="text-sm font-medium text-gray-900">
                       Description
@@ -192,7 +190,6 @@ const ProductDetailPage: React.FC = () => {
                     </p>
                   </div>
 
-                  {/* Quantity Controls */}
                   <div className="mt-8">
                     <div className="flex items-center space-x-4">
                       <h3 className="text-sm font-medium text-gray-900">
@@ -228,19 +225,24 @@ const ProductDetailPage: React.FC = () => {
                     </div>
 
                     {messages[product.id] && (
-                      <p className="mt-2 text-sm text-red-500">
+                      <p
+                        className={`mt-2 text-sm ${
+                          messages[product.id].includes("success")
+                            ? "text-green-500"
+                            : "text-red-500"
+                        }`}
+                      >
                         {messages[product.id]}
                       </p>
                     )}
                   </div>
 
-                  {/* Action Buttons */}
                   <div className="mt-auto pt-8 space-y-4">
                     <button
-                      onClick={() => increaseQuantity()}
-                      disabled={quantity === 5}
+                      onClick={handleAddToCart}
+                      disabled={quantity === 0}
                       className={`w-full flex justify-center items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white ${
-                        quantity === 5
+                        quantity === 0
                           ? "bg-gray-400 cursor-not-allowed"
                           : "bg-indigo-600 hover:bg-indigo-700"
                       } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200`}
@@ -249,7 +251,7 @@ const ProductDetailPage: React.FC = () => {
                     </button>
 
                     <Link
-                      to="/ProductPage"
+                      to="/"
                       className="w-full flex justify-center items-center px-6 py-3 border border-gray-300 rounded-md shadow-sm text-base font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200"
                     >
                       Continue Shopping
