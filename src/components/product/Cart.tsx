@@ -3,6 +3,7 @@ import Navbar from "../common/Navbar";
 import Footer from "../common/Footer";
 import { RazorpayPayment } from "../../utils/RazorpayService";
 import { IndianRupee } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface Product {
   id: number;
@@ -342,12 +343,12 @@ const CartPage: React.FC = () => {
                       <div className="mt-4 flex justify-center text-sm text-gray-500">
                         <p className="text-xl">
                           Or{" "}
-                          <a
-                            href="/"
+                          <Link
+                            to="/"
                             className="font-medium text-indigo-600 hover:text-indigo-500 text-xl"
                           >
                             Continue Shopping
-                          </a>
+                          </Link>
                         </p>
                       </div>
                     </div>
