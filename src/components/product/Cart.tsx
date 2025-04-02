@@ -343,7 +343,7 @@ const CartPage: React.FC = () => {
                         <p className="text-xl">
                           Or{" "}
                           <a
-                            href="/ProductPage"
+                            href="/"
                             className="font-medium text-indigo-600 hover:text-indigo-500 text-xl"
                           >
                             Continue Shopping
