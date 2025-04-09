@@ -70,7 +70,7 @@ export const RazorpayPayment = async (
 
     const options: RazorpayOptions = {
       key: "rzp_test_OyFUhtYPPaavPN",
-      amount: Math.round(amount * 100 * 10),
+      amount: Math.round(amount * 100),
       currency: currency || "INR",
       name: "Cartify.com",
       description: "Purchase from Your Store",
