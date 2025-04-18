@@ -72,7 +72,7 @@ const ProductDetailPage: React.FC = () => {
           ...prevMessages,
           [product.id]: "",
         }));
-      }, 3000);
+      }, 4000);
     }
   };
 

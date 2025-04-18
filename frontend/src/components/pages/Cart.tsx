@@ -118,7 +118,7 @@ const CartPage: React.FC = () => {
                 <div className="flex justify-between items-center">
                   <h2 className="text-lg font-medium text-gray-900">Items</h2>
                   <span className="px-3 py-1 bg-indigo-50 text-indigo-700 rounded-full text-sm font-medium">
-                    {cartCount} {cartCount === 1 ? 'Item' : 'Items'}
+                    {cartCount} {cartCount === 1 ? "Item" : "Items"}
                   </span>
                 </div>
               </div>
@@ -137,8 +137,12 @@ const CartPage: React.FC = () => {
                     <div className="flex-1 flex flex-col">
                       <div className="flex justify-between">
                         <div>
-                          <h3 className="text-lg font-medium text-gray-900">{item.title}</h3>
-                          <p className="mt-1 text-sm text-gray-500">{item.category}</p>
+                          <h3 className="text-lg font-medium text-gray-900">
+                            {item.title}
+                          </h3>
+                          <p className="mt-1 text-sm text-gray-500">
+                            {item.category}
+                          </p>
                         </div>
                         <div className="text-right">
                           <p className="flex items-center text-lg font-medium text-gray-900">
@@ -157,7 +161,7 @@ const CartPage: React.FC = () => {
                           <div className="flex items-center border rounded-lg bg-white shadow-sm">
                             <button
                               onClick={() => updateQuantity(item.id, -1)}
-                              className="p-2 hover:bg-gray-50"
+                              className="p-2 hover:bg-gray-50 cursor-pointer"
                             >
                               <Minus size={16} />
                             </button>
@@ -166,15 +170,17 @@ const CartPage: React.FC = () => {
                             </span>
                             <button
                               onClick={() => updateQuantity(item.id, 1)}
-                              className="p-2 hover:bg-gray-50"
+                              className="p-2 hover:bg-gray-50 cursor-pointer"
                             >
                               <Plus size={16} />
                             </button>
                           </div>
                         </div>
                         <button
-                          onClick={() => updateQuantity(item.id, -item.quantity)}
-                          className="text-sm font-medium text-indigo-600 hover:text-indigo-700"
+                          onClick={() =>
+                            updateQuantity(item.id, -item.quantity)
+                          }
+                          className="text-sm font-medium text-red-600 hover:text-red-700 cursor-pointer"
                         >
                           Remove
                         </button>
@@ -199,12 +205,16 @@ const CartPage: React.FC = () => {
           <div className="lg:col-span-1">
             <div className="bg-white rounded-xl shadow-sm border border-gray-100 sticky top-8">
               <div className="p-6 border-b border-gray-100">
-                <h2 className="text-lg font-medium text-gray-900">Order Summary</h2>
+                <h2 className="text-lg font-medium text-gray-900">
+                  Order Summary
+                </h2>
               </div>
 
               <div className="p-6 space-y-4">
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-600">Subtotal ({cartCount} items)</span>
+                  <span className="text-gray-600">
+                    Subtotal ({cartCount} items)
+                  </span>
                   <span className="flex items-center font-medium text-gray-900">
                     <IndianRupee size={16} className="mr-1" />
                     {subtotal}
@@ -232,15 +242,15 @@ const CartPage: React.FC = () => {
                         </div>
                         <button
                           onClick={removeGiftCard}
-                          className="text-sm font-medium text-red-600 hover:text-red-700"
+                          className="text-sm font-medium text-red-600 hover:text-red-700 ml-3 cursor-pointer"
                         >
                           Remove
                         </button>
                       </div>
                       <div className="mt-2 flex justify-between text-sm text-green-700">
-                        <span>Savings</span>
+                        <span>Saving Of</span>
                         <span className="flex items-center font-medium">
-                          -<IndianRupee size={16} className="mx-1" />
+                          <IndianRupee size={16} className="mx-1" />
                           {discountAmount.toFixed(2)}
                         </span>
                       </div>
@@ -260,7 +270,7 @@ const CartPage: React.FC = () => {
                         />
                         <button
                           onClick={applyGiftCard}
-                          className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 text-sm font-medium shadow-sm"
+                          className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 text-sm font-medium shadow-sm cursor-pointer"
                         >
                           Apply
                         </button>
@@ -276,7 +286,9 @@ const CartPage: React.FC = () => {
 
                 <div className="pt-4 border-t border-gray-100">
                   <div className="flex justify-between items-center">
-                    <span className="text-base font-semibold text-gray-900">Total</span>
+                    <span className="text-base font-semibold text-gray-900">
+                      Total
+                    </span>
                     <span className="flex items-center text-xl font-semibold text-gray-900">
                       <IndianRupee size={20} className="mr-1" />
                       {totalCost}
@@ -286,7 +298,7 @@ const CartPage: React.FC = () => {
 
                 <button
                   onClick={handleCheckout}
-                  className="w-full bg-indigo-600 text-white py-3 px-4 rounded-lg hover:bg-indigo-700 font-medium shadow-sm mt-6"
+                  className="w-full bg-indigo-600 text-white py-3 px-4 rounded-lg hover:bg-indigo-700 font-medium shadow-sm mt-6 cursor-pointer"
                 >
                   Proceed to Checkout
                 </button>
