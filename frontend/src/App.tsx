@@ -2,7 +2,7 @@ import Login from "./components/auth/Login";
 import ProductPage from "./components/pages/ProductPage";
 import "./index.css";
 import { BrowserRouter as Router, useRoutes } from "react-router-dom";
-
+import AdminDashboard from "./components/auth/AdminDashboard";
 import Cart from "./components/pages/Cart";
 import ProductDetailPage from "./components/pages/ProductDetailPage";
 import Register from "./components/auth/Register";
@@ -17,6 +17,7 @@ const AppRoutes: React.FC = () => {
     { path: "/product/:id", element: <ProductDetailPage /> },
     { path: "/registerPage", element: <Register /> },
     { path: "/changePassword", element: <ChangePassword /> },
+    { path: "/admin", element: <AdminDashboard /> },
   ];
 
   return useRoutes(routes);

@@ -3,6 +3,7 @@ const cors = require("cors");
 const connectDB = require("./db");
 const productRoutes = require("./routes/products");
 const authRoutes = require("./routes/auth");
+const adminRoutes = require("./routes/admin");
 
 const app = express();
 
@@ -10,19 +11,22 @@ const app = express();
 connectDB();
 
 // Middleware
-app.use(cors({
-  origin: "*", // In production, replace with your frontend URL
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true
-}));
+app.use(
+  cors({
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).json({ message: "Something went wrong!", error: err.message });
+  res
+    .status(500)
+    .json({ message: "Something went wrong!", error: err.message });
 });
 
 // Base route
@@ -33,6 +37,7 @@ app.get("/", (req, res) => {
 // API routes
 app.use("/api/products", productRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/admin", adminRoutes);
 
 // Handle 404 routes
 app.use((req, res) => {

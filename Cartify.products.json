@@ -9,6 +9,7 @@
   "quantity": 300,
   "isActive": true,
   "rating": 4.4,
+  "category": "Electronics",
   "createdAt": {
     "$date": "2025-04-16T12:40:23.489Z"
   },
@@ -27,6 +28,7 @@
   "quantity": 400,
   "isActive": true,
   "rating": 3.8,
+  "category": "Electronics",
   "createdAt": {
     "$date": "2025-04-16T12:41:41.978Z"
   },
@@ -45,6 +47,7 @@
   "quantity": 500,
   "isActive": true,
   "rating": 4.1,
+  "category": "Audio",
   "createdAt": {
     "$date": "2025-04-16T12:42:52.124Z"
   },
@@ -63,6 +66,7 @@
   "quantity": 400,
   "isActive": true,
   "rating": 4.2,
+  "category": "Audio",
   "createdAt": {
     "$date": "2025-04-16T12:43:49.153Z"
   },
@@ -81,6 +85,7 @@
   "quantity": 300,
   "isActive": true,
   "rating": 5,
+  "category": "Gaming",
   "createdAt": {
     "$date": "2025-04-16T12:44:50.254Z"
   },
@@ -99,6 +104,7 @@
   "quantity": 400,
   "isActive": true,
   "rating": 4.2,
+  "category": "Smartphones",
   "createdAt": {
     "$date": "2025-04-16T12:45:39.711Z"
   },
@@ -117,6 +123,7 @@
   "quantity": 400,
   "isActive": true,
   "rating": 4.2,
+  "category": "Audio",
   "createdAt": {
     "$date": "2025-04-16T12:47:04.069Z"
   },
@@ -135,6 +142,7 @@
   "quantity": 210,
   "isActive": true,
   "rating": 4.6,
+  "category": "Audio",
   "createdAt": {
     "$date": "2025-04-16T12:48:14.542Z"
   },
@@ -153,6 +161,7 @@
   "quantity": 490,
   "isActive": true,
   "rating": 4.1,
+  "category": "Smart Home",
   "createdAt": {
     "$date": "2025-04-16T12:48:56.960Z"
   },
@@ -171,6 +180,7 @@
   "quantity": 500,
   "isActive": true,
   "rating": 3.5,
+  "category": "Electronics",
   "createdAt": {
     "$date": "2025-04-16T12:50:10.177Z"
   },
@@ -189,6 +199,7 @@
   "quantity": 340,
   "isActive": true,
   "rating": 4.4,
+  "category": "Smartphones",
   "createdAt": {
     "$date": "2025-04-16T12:51:11.093Z"
   },
@@ -207,6 +218,7 @@
   "quantity": 610,
   "isActive": true,
   "rating": 4.7,
+  "category": "TVs",
   "createdAt": {
     "$date": "2025-04-16T12:52:44.498Z"
   },
@@ -225,6 +237,7 @@
   "quantity": 896,
   "isActive": true,
   "rating": 4.2,
+  "category": "Accessories",
   "createdAt": {
     "$date": "2025-04-16T12:54:02.558Z"
   },
@@ -243,6 +256,7 @@
   "quantity": 230,
   "isActive": true,
   "rating": 4.2,
+  "category": "Audio",
   "createdAt": {
     "$date": "2025-04-16T12:55:05.309Z"
   },
@@ -261,6 +275,7 @@
   "quantity": 210,
   "isActive": true,
   "rating": 4.2,
+  "category": "Footwear",
   "createdAt": {
     "$date": "2025-04-16T12:56:17.144Z"
   },
@@ -279,6 +294,7 @@
   "quantity": 90,
   "isActive": true,
   "rating": 4.4,
+  "category": "Cameras",
   "createdAt": {
     "$date": "2025-04-16T12:57:13.815Z"
   },
@@ -297,6 +313,7 @@
   "quantity": 400,
   "isActive": true,
   "rating": 4.3,
+  "category": "Beauty",
   "createdAt": {
     "$date": "2025-04-16T12:58:26.185Z"
   },
@@ -315,6 +332,7 @@
   "quantity": 400,
   "isActive": true,
   "rating": 4.2,
+  "category": "Bags",
   "createdAt": {
     "$date": "2025-04-16T13:01:09.295Z"
   },
@@ -333,6 +351,7 @@
   "quantity": 530,
   "isActive": true,
   "rating": 3.9,
+  "category": "Clothing",
   "createdAt": {
     "$date": "2025-04-16T13:02:16.406Z"
   },
@@ -351,6 +370,7 @@
   "quantity": 600,
   "isActive": true,
   "rating": 4.9,
+  "category": "Sports",
   "createdAt": {
     "$date": "2025-04-16T13:03:31.898Z"
   },
@@ -369,6 +389,7 @@
   "quantity": 200,
   "isActive": true,
   "rating": 4.2,
+  "category": "Footwear",
   "createdAt": {
     "$date": "2025-04-16T13:04:31.726Z"
   },
@@ -387,6 +408,7 @@
   "quantity": 432,
   "isActive": true,
   "rating": 4,
+  "category": "Smartphones",
   "createdAt": {
     "$date": "2025-04-16T13:06:46.592Z"
   },
@@ -405,6 +427,7 @@
   "quantity": 90,
   "isActive": true,
   "rating": 3.8,
+  "category": "Laptops",
   "createdAt": {
     "$date": "2025-04-16T13:07:38.987Z"
   },
@@ -423,6 +446,7 @@
   "quantity": 300,
   "isActive": true,
   "rating": 4.2,
+  "category": "Tablets",
   "createdAt": {
     "$date": "2025-04-16T13:23:32.485Z"
   },
@@ -441,6 +465,7 @@
   "quantity": 400,
   "isActive": true,
   "rating": 4.3,
+  "category": "Smartphones",
   "createdAt": {
     "$date": "2025-04-16T13:25:55.192Z"
   },
@@ -459,6 +484,7 @@
   "quantity": 500,
   "isActive": true,
   "rating": 5,
+  "category": "Sports",
   "createdAt": {
     "$date": "2025-04-16T13:27:36.314Z"
   },
@@ -477,6 +503,7 @@
   "quantity": 257,
   "isActive": true,
   "rating": 4.3,
+  "category": "Tablets",
   "createdAt": {
     "$date": "2025-04-16T13:28:38.428Z"
   },
@@ -495,6 +522,7 @@
   "quantity": 430,
   "isActive": true,
   "rating": 4.2,
+  "category": "Smartphones",
   "createdAt": {
     "$date": "2025-04-16T13:29:45.708Z"
   },
@@ -513,6 +541,7 @@
   "quantity": 450,
   "isActive": true,
   "rating": 4.3,
+  "category": "Footwear",
   "createdAt": {
     "$date": "2025-04-16T13:34:20.457Z"
   },
@@ -531,6 +560,7 @@
   "quantity": 542,
   "isActive": true,
   "rating": 3.7,
+  "category": "Clothing",
   "createdAt": {
     "$date": "2025-04-16T13:35:44.595Z"
   },
@@ -549,6 +579,7 @@
   "quantity": 120,
   "isActive": true,
   "rating": 4.2,
+  "category": "Laptops",
   "createdAt": {
     "$date": "2025-04-16T13:36:38.665Z"
   },
@@ -567,6 +598,7 @@
   "quantity": 430,
   "isActive": true,
   "rating": 3.9,
+  "category": "Bags",
   "createdAt": {
     "$date": "2025-04-16T13:37:27.023Z"
   },
@@ -585,6 +617,7 @@
   "quantity": 320,
   "isActive": true,
   "rating": 4.2,
+  "category": "TVs",
   "createdAt": {
     "$date": "2025-04-16T13:38:45.405Z"
   },
@@ -603,6 +636,7 @@
   "quantity": 231,
   "isActive": true,
   "rating": 3.7,
+  "category": "Footwear",
   "createdAt": {
     "$date": "2025-04-16T13:41:09.168Z"
   },
@@ -621,6 +655,7 @@
   "quantity": 345,
   "isActive": true,
   "rating": 4.6,
+  "category": "Audio",
   "createdAt": {
     "$date": "2025-04-16T13:41:55.776Z"
   },
@@ -639,6 +674,7 @@
   "quantity": 502,
   "isActive": true,
   "rating": 4.9,
+  "category": "Accessories",
   "createdAt": {
     "$date": "2025-04-16T13:43:14.473Z"
   },
@@ -657,6 +693,7 @@
   "quantity": 349,
   "isActive": true,
   "rating": 4.1,
+  "category": "Smartphones",
   "createdAt": {
     "$date": "2025-04-16T13:44:19.595Z"
   },
@@ -675,6 +712,7 @@
   "quantity": 231,
   "isActive": true,
   "rating": 4.4,
+  "category": "Smartphones",
   "createdAt": {
     "$date": "2025-04-16T13:45:15.117Z"
   },
@@ -693,6 +731,7 @@
   "quantity": 430,
   "isActive": true,
   "rating": 4.3,
+  "category": "Smartphones",
   "createdAt": {
     "$date": "2025-04-16T13:47:27.993Z"
   },
@@ -705,12 +744,13 @@
     "$oid": "67ffb5533bd71b1e9cc75c19"
   },
   "title": "Apple iPhone 15 Plus",
-  "description": "Apple iPhone 15 Plus (128 GB) - Black |DYNAMIC ISLAND COMES TO IPHONE 15 — Dynamic Island bubbles up alerts and Live Activities — so you don’t miss them while you’re doing something else. You can see who’s calling, track your next ride, check your flight status, and so much more ",
+  "description": "Apple iPhone 15 Plus (128 GB) - Black |DYNAMIC ISLAND COMES TO IPHONE 15 — Dynamic Island bubbles up alerts and Live Activities — so you don't miss them while you're doing something else. You can see who's calling, track your next ride, check your flight status, and so much more ",
   "image": "https://gateway.pinata.cloud/ipfs/QmeAX7DWx4bkDn18Pk4HbroxfmSsArPL341EpvF6EJt565",
   "price": 72999,
   "quantity": 439,
   "isActive": true,
   "rating": 4.8,
+  "category": "Smartphones",
   "createdAt": {
     "$date": "2025-04-16T13:49:07.154Z"
   },
@@ -729,6 +769,7 @@
   "quantity": 542,
   "isActive": true,
   "rating": 4.7,
+  "category": "Accessories",
   "createdAt": {
     "$date": "2025-04-16T13:51:10.209Z"
   },
@@ -747,6 +788,7 @@
   "quantity": 340,
   "isActive": true,
   "rating": 4.3,
+  "category": "Smartphones",
   "createdAt": {
     "$date": "2025-04-16T13:53:20.392Z"
   },
@@ -765,6 +807,7 @@
   "quantity": 546,
   "isActive": true,
   "rating": 4.3,
+  "category": "Audio",
   "createdAt": {
     "$date": "2025-04-16T13:54:43.703Z"
   },
@@ -783,6 +826,7 @@
   "quantity": 453,
   "isActive": true,
   "rating": 3.9,
+  "category": "Electronics",
   "createdAt": {
     "$date": "2025-04-16T13:55:49.470Z"
   },
@@ -801,10 +845,68 @@
   "quantity": 230,
   "isActive": true,
   "rating": 4.3,
+  "category": "Accessories",
   "createdAt": {
     "$date": "2025-04-16T13:57:20.436Z"
   },
   "id": 45,
   "__v": 0,
   "count": 91
+},
+{
+  "_id": {
+    "$oid": "67ffa6063bd71b1e9cc75b9d"
+  },
+  "title": "Noise ColorFit Pulse 3",
+  "description": "Noise ColorFit Pulse 3 Smart Watch with 1.96 TFT Display, Bluetooth Calling, 100+ Sports Modes & Watch Faces, Heart Rate Monitoring, Sleep Tracking (Jet Black)",
+  "image": "https://gateway.pinata.cloud/ipfs/QmQxVZPGGxVXXGXBXxGXXGXXGXXGXXGXXGXXGXXGXXGXXG",
+  "price": 1499,
+  "quantity": 600,
+  "isActive": true,
+  "rating": 4.3,
+  "category": "Wearables",
+  "createdAt": {
+    "$date": "2025-04-16T12:43:50.124Z"
+  },
+  "id": 4,
+  "__v": 0,
+  "count": 5430
+},
+{
+  "_id": {
+    "$oid": "67ffa6463bd71b1e9cc75ba1"
+  },
+  "title": "Lenovo IdeaPad Slim 3",
+  "description": "Lenovo IdeaPad Slim 3 Intel Core i3 11th Gen 15.6 (39.62cm) FHD Thin & Light Laptop (8GB/256GB SSD/Windows 11/Office 2021/2Yr Warranty/3months Game Pass/Arctic Grey/1.65Kg), 82H801L7IN",
+  "image": "https://gateway.pinata.cloud/ipfs/QmQxVZPGGxVXXGXBXxGXXGXXGXXGXXGXXGXXGXXGXXGXXG",
+  "price": 31990,
+  "quantity": 100,
+  "isActive": true,
+  "rating": 4.2,
+  "category": "Laptops",
+  "createdAt": {
+    "$date": "2025-04-16T12:44:54.124Z"
+  },
+  "id": 5,
+  "__v": 0,
+  "count": 1230
+},
+{
+  "_id": {
+    "$oid": "67ffa6883bd71b1e9cc75ba5"
+  },
+  "title": "Apple iPhone 15",
+  "description": "Apple iPhone 15 (128 GB) - Black",
+  "image": "https://gateway.pinata.cloud/ipfs/QmQxVZPGGxVXXGXBXxGXXGXXGXXGXXGXXGXXGXXGXXGXXG",
+  "price": 71999,
+  "quantity": 50,
+  "isActive": true,
+  "rating": 4.5,
+  "category": "Smartphones",
+  "createdAt": {
+    "$date": "2025-04-16T12:46:00.124Z"
+  },
+  "id": 6,
+  "__v": 0,
+  "count": 890
 }]

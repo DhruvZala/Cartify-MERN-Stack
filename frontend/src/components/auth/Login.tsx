@@ -41,7 +41,7 @@ const Login: React.FC = () => {
 
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/auth/login`,
+          `${import.meta.env.VITE_API_URL}/api/admin/login`,
           {
             method: "POST",
             headers: {
@@ -63,11 +63,17 @@ const Login: React.FC = () => {
         localStorage.setItem('jwtToken', data.token);
         Cookies.set('jwtToken', data.token, { expires: 1 });
 
-        localStorage.setItem('userId', data.user.userId);
-        localStorage.setItem('email', data.user.email);
-        localStorage.setItem('name', data.user.name);
-
-        navigate("/ProductPage");
+        if (data.isAdmin) {
+          localStorage.setItem('userId', data.user.userId);
+          localStorage.setItem('email', data.user.email);
+          localStorage.setItem('name', data.user.name);
+          navigate("/admin");
+        } else {
+          localStorage.setItem('userId', data.user.userId);
+          localStorage.setItem('email', data.user.email);
+          localStorage.setItem('name', data.user.name);
+          navigate("/ProductPage");
+        }
       } catch (error) {
         console.error("Login error:", error);
         setLoginError(
