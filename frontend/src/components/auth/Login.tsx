@@ -189,7 +189,7 @@ const Login: React.FC = () => {
                 to="/changePassword"
                 className="text-sm font-medium text-indigo-600 hover:text-indigo-500 hover:underline"
               >
-                Forgot password?
+                Change password?
               </Link>
             </div>
 
