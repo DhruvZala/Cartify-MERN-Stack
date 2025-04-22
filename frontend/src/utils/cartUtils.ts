@@ -12,12 +12,12 @@ export interface Product {
 }
 
 export const getCartFromStorage = (): Product[] => {
-  const cart = sessionStorage.getItem("cart");
+  const cart = localStorage.getItem("cart");
   return cart ? JSON.parse(cart) : [];
 };
 
 export const saveCartToStorage = (cart: Product[]): void => {
-  sessionStorage.setItem("cart", JSON.stringify(cart));
+  localStorage.setItem("cart", JSON.stringify(cart));
 };
 
 export const calculateCartCount = (cart: Product[]): number => {

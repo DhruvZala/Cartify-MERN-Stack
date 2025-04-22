@@ -5,7 +5,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import "../../styles/login.css";
 import { passwordRegex, emailRegex } from "../../utils/constants/constants";
-import Cookies from 'js-cookie';
+import Cookies from "js-cookie";
 
 const validationSchema = Yup.object({
   email: Yup.string()
@@ -57,27 +57,33 @@ const Login: React.FC = () => {
         const data = await response.json();
 
         if (!response.ok) {
-          throw new Error(data.message || 'Login failed');
+          throw new Error(data.message || "Login failed");
         }
 
-        localStorage.setItem('jwtToken', data.token);
-        Cookies.set('jwtToken', data.token, { expires: 1 });
+        if (data.isAdmin) {
+          sessionStorage.setItem("jwtToken", data.token);
+        } else {
+          localStorage.setItem("jwtToken", data.token);
+          Cookies.set("jwtToken", data.token, { expires: 1 });
+        }
 
         if (data.isAdmin) {
-          localStorage.setItem('userId', data.user.userId);
-          localStorage.setItem('email', data.user.email);
-          localStorage.setItem('name', data.user.name);
+          sessionStorage.setItem("userId", data.user.userId);
+          sessionStorage.setItem("email", data.user.email);
+          sessionStorage.setItem("name", data.user.name);
           navigate("/admin");
         } else {
-          localStorage.setItem('userId', data.user.userId);
-          localStorage.setItem('email', data.user.email);
-          localStorage.setItem('name', data.user.name);
+          localStorage.setItem("userId", data.user.userId);
+          localStorage.setItem("email", data.user.email);
+          localStorage.setItem("name", data.user.name);
           navigate("/ProductPage");
         }
       } catch (error) {
         console.error("Login error:", error);
         setLoginError(
-          error instanceof Error ? error.message : "An error occurred during login. Please try again."
+          error instanceof Error
+            ? error.message
+            : "An error occurred during login. Please try again."
         );
       } finally {
         setIsSubmitting(false);

@@ -23,7 +23,7 @@ const CartPage: React.FC = () => {
   const [paymentError, setPaymentError] = useState<string | null>(null);
 
   useEffect(() => {
-    const cartData = JSON.parse(sessionStorage.getItem("cart") || "[]");
+    const cartData = JSON.parse(localStorage.getItem("cart") || "[]");
     setCart(cartData);
   }, []);
 
@@ -41,7 +41,7 @@ const CartPage: React.FC = () => {
       })
       .filter((item) => item.quantity > 0);
     setCart(updatedCart);
-    sessionStorage.setItem("cart", JSON.stringify(updatedCart));
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
   };
 
   const applyGiftCard = () => {
@@ -91,7 +91,7 @@ const CartPage: React.FC = () => {
       "INR",
       (paymentId: unknown) => {
         alert(`Payment successful! ID: ${paymentId}`);
-        sessionStorage.removeItem("cart");
+        localStorage.removeItem("cart");
         setCart([]);
       },
       (error: React.SetStateAction<string | null>) => {
