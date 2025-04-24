@@ -4,6 +4,7 @@ import Footer from "../common/Footer";
 import { RazorpayPayment } from "../../utils/RazorpayService";
 import { Minus, Plus, Gift, IndianRupee, ShoppingCart } from "lucide-react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 interface Product {
   id: number;
@@ -89,10 +90,33 @@ const CartPage: React.FC = () => {
     await RazorpayPayment(
       parseFloat(totalCost),
       "INR",
-      (paymentId: unknown) => {
-        alert(`Payment successful! ID: ${paymentId}`);
-        localStorage.removeItem("cart");
-        setCart([]);
+      async (paymentId: unknown) => {
+        try {
+          const response = await axios.post(
+            "http://localhost:5000/api/products/update-quantities",
+            {
+              items: cart.map((item) => ({
+                id: item.id,
+                quantity: item.quantity,
+              })),
+            }
+          );
+
+          if (response.status === 200) {
+            alert(`Payment successful! ID: ${paymentId}`);
+            localStorage.removeItem("cart");
+            setCart([]);
+          } else {
+            setPaymentError(
+              "Failed to update product quantities. Please contact support."
+            );
+          }
+        } catch (error) {
+          console.error("Error updating product quantities:", error);
+          setPaymentError(
+            "Failed to update product quantities. Please contact support."
+          );
+        }
       },
       (error: React.SetStateAction<string | null>) => {
         setPaymentError(error);

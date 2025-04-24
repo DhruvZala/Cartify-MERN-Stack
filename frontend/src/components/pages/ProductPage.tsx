@@ -23,6 +23,7 @@ const ProductPage: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const [cartCount, setCartCount] = useState<number>(0);
   const [cart, setCart] = useState<Product[]>([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -35,8 +36,14 @@ const ProductPage: React.FC = () => {
 
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/products");
-        setProducts(response.data);
+        setLoading(true);
+        const response = await axios.get(`http://localhost:5000/api/products?page=${currentPage}&limit=${productsPerPage}`);
+        if (response.data && response.data.products) {
+          setProducts(response.data.products);
+          setTotalPages(response.data.totalPages);
+        } else {
+          console.error("Invalid response format:", response.data);
+        }
       } catch (error) {
         console.error("Error fetching products:", error);
       } finally {
@@ -49,7 +56,7 @@ const ProductPage: React.FC = () => {
     const storedCart = getCartFromStorage();
     setCart(storedCart);
     setCartCount(calculateCartCount(storedCart));
-  }, []);
+  }, [currentPage]);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -63,15 +70,7 @@ const ProductPage: React.FC = () => {
     }
   };
 
-  const indexOfLastProduct = currentPage * productsPerPage;
-  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = products.slice(
-    indexOfFirstProduct,
-    indexOfLastProduct
-  );
-  const totalPages = Math.ceil(products.length / productsPerPage);
-
-  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+  const currentProducts = products;
 
   const updateQuantity = (productId: number, change: number) => {
     if (!isLoggedIn) {
@@ -199,16 +198,20 @@ const ProductPage: React.FC = () => {
                     {!isInCart(product.id) ? (
                       <button
                         onClick={() => addToCart(product)}
-                        disabled={!isLoggedIn}
+                        disabled={!isLoggedIn || product.quantity === 0}
                         className={`inline-flex cursor-pointer py-2 px-8 rounded-lg font-medium transition-all duration-200 items-center justify-center space-x-2 ${
-                          isLoggedIn
+                          isLoggedIn && product.quantity > 0
                             ? "bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white border border-transparent"
                             : "bg-gray-100 text-gray-400 cursor-not-allowed border border-gray-200"
                         }`}
                       >
                         <ShoppingCart className="h-5 w-5" />
                         <span className="text-sm">
-                          {isLoggedIn ? "Add to Cart" : "Login to Add"}
+                          {!isLoggedIn 
+                            ? "Login to Add" 
+                            : product.quantity === 0 
+                              ? "Out of Stock" 
+                              : "Add to Cart"}
                         </span>
                       </button>
                     ) : (
@@ -249,49 +252,51 @@ const ProductPage: React.FC = () => {
               ))}
             </div>
 
-            <div className="flex justify-center mt-8 items-center space-x-2">
-              <button
-                onClick={() => paginate(currentPage - 1)}
-                disabled={currentPage === 1}
-                className={`flex items-center space-x-1 px-4 py-2 rounded-lg text-sm font-medium ${
-                  currentPage === 1
-                    ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-                    : "bg-white text-gray-700 hover:bg-gray-50 border border-gray-200"
-                }`}
-              >
-                <ChevronLeft className="h-4 w-4" />
-                <span>Previous</span>
-              </button>
+            {totalPages > 1 && (
+              <div className="flex justify-center mt-8 items-center space-x-2">
+                <button
+                  onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                  disabled={currentPage === 1}
+                  className={`flex items-center space-x-1 px-4 py-2 rounded-lg text-sm font-medium ${
+                    currentPage === 1
+                      ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                      : "bg-white text-gray-700 hover:bg-gray-50 border border-gray-200"
+                  }`}
+                >
+                  <ChevronLeft className="h-4 w-4" />
+                  <span>Previous</span>
+                </button>
 
-              <div className="flex items-center space-x-1">
-                {Array.from({ length: totalPages }, (_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => paginate(index + 1)}
-                    className={`px-4 py-2 text-sm rounded-lg font-medium ${
-                      currentPage === index + 1
-                        ? "bg-indigo-600 text-white"
-                        : "bg-white text-gray-700 hover:bg-gray-50 border border-gray-200"
-                    }`}
-                  >
-                    {index + 1}
-                  </button>
-                ))}
+                <div className="flex items-center space-x-1">
+                  {Array.from({ length: totalPages }, (_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentPage(index + 1)}
+                      className={`px-4 py-2 text-sm rounded-lg font-medium ${
+                        currentPage === index + 1
+                          ? "bg-indigo-600 text-white"
+                          : "bg-white text-gray-700 hover:bg-gray-50 border border-gray-200"
+                      }`}
+                    >
+                      {index + 1}
+                    </button>
+                  ))}
+                </div>
+
+                <button
+                  onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                  disabled={currentPage === totalPages}
+                  className={`flex items-center space-x-1 px-4 py-2 rounded-lg text-sm font-medium ${
+                    currentPage === totalPages
+                      ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                      : "bg-white text-gray-700 hover:bg-gray-50 border border-gray-200"
+                  }`}
+                >
+                  <span>Next</span>
+                  <ChevronRight className="h-4 w-4" />
+                </button>
               </div>
-
-              <button
-                onClick={() => paginate(currentPage + 1)}
-                disabled={currentPage === totalPages}
-                className={`flex items-center space-x-1 px-4 py-2 rounded-lg text-sm font-medium ${
-                  currentPage === totalPages
-                    ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-                    : "bg-white text-gray-700 hover:bg-gray-50 border border-gray-200"
-                }`}
-              >
-                <span>Next</span>
-                <ChevronRight className="h-4 w-4" />
-              </button>
-            </div>
+            )}
           </>
         )}
       </main>

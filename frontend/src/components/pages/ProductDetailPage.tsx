@@ -10,7 +10,7 @@ import {
   calculateCartCount,
   updateCartItem,
 } from "../../utils/cartUtils";
-import { IndianRupee, ShoppingCart, Star, Truck, Shield, ArrowLeft, Package, Clock, CheckCircle } from "lucide-react";
+import { IndianRupee, ShoppingCart, Star, Truck, Shield, ArrowLeft, Package, Clock, CheckCircle, AlertCircle } from "lucide-react";
 
 const ProductDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -262,13 +262,26 @@ const ProductDetailPage: React.FC = () => {
                     <div className="pt-4">
                       <button
                         onClick={handleAddToCart}
-                        disabled={quantity === 0}
+                        disabled={quantity === 0 || product.quantity === 0}
                         className="w-full flex justify-center items-center px-6 py-3 border border-transparent rounded-xl shadow-sm text-base font-medium text-white bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         <ShoppingCart className="mr-2 h-4 w-4" />
-                        {quantity > 0 ? "Update Cart" : "Add to Cart"}
+                        {product.quantity === 0 
+                          ? "Out of Stock" 
+                          : quantity > 0 
+                            ? "Update Cart" 
+                            : "Add to Cart"}
                       </button>
                     </div>
+
+                    {product.quantity === 0 && (
+                      <div className="mt-2 p-2 rounded-lg bg-red-50 text-red-800 border border-red-200">
+                        <div className="flex items-center">
+                          <AlertCircle className="h-4 w-4 mr-2" />
+                          <p className="text-sm">This product is currently out of stock</p>
+                        </div>
+                      </div>
+                    )}
 
                     <div className="text-center pt-2">
                       <Link

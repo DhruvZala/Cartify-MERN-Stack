@@ -5,13 +5,6 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { passwordRegex } from "../../utils/constants/constants";
 
-interface User {
-  name: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-}
-
 const validationSchema = Yup.object({
   email: Yup.string()
     .email("Invalid email format")
@@ -46,37 +39,40 @@ const ChangePassword: React.FC = () => {
       confirmPassword: "",
     },
     validationSchema,
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       setError("");
       setSuccess("");
 
-      const users: User[] = JSON.parse(
-        localStorage.getItem("userDetails") || "[]"
-      );
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/auth/change-password`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: values.email,
+              currentPassword: values.currentPassword,
+              newPassword: values.newPassword,
+            }),
+          }
+        );
 
-      const userIndex = users.findIndex((user) => user.email === values.email);
+        const data = await response.json();
 
-      if (userIndex === -1) {
-        setError("Email is not registered");
-        return;
+        if (!response.ok) {
+          throw new Error(data.message || "Failed to change password");
+        }
+
+        setSuccess("Password changed successfully!");
+        formik.resetForm();
+      } catch (error) {
+        console.error("Change password error:", error);
+        setError(
+          error instanceof Error ? error.message : "Failed to change password"
+        );
       }
-
-      if (users[userIndex].password !== values.currentPassword) {
-        setError("Current password is incorrect");
-        return;
-      }
-
-      const updatedUsers = [...users];
-      updatedUsers[userIndex] = {
-        ...updatedUsers[userIndex],
-        password: values.newPassword,
-        confirmPassword: values.newPassword,
-      };
-
-      localStorage.setItem("userDetails", JSON.stringify(updatedUsers));
-
-      setSuccess("Password changed successfully!");
-      formik.resetForm();
     },
   });
 
