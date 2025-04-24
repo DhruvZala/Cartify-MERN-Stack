@@ -1,6 +1,6 @@
 import React from "react";
 import { CircleUserRound, ShoppingCart } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 interface NavbarProps {
   cartCount: number;
@@ -10,14 +10,14 @@ const Navbar: React.FC<NavbarProps> = ({ cartCount }) => {
   const isLoggedIn = localStorage.getItem("jwtToken");
   const userName = localStorage.getItem("name");
   const userEmail = localStorage.getItem("email");
-
+  const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.removeItem("jwtToken");
     localStorage.removeItem("email");
     localStorage.removeItem("name");
     localStorage.removeItem("password");
-    document.cookie =
-      "jwtToken=;  path=/;";
+    navigate("/");
+    document.cookie = "jwtToken=;  path=/;";
     window.location.reload();
   };
 
