@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect } from "react";
 import Navbar from "../common/Navbar";
 import Footer from "../common/Footer";
@@ -91,9 +92,9 @@ const CartPage: React.FC = () => {
     await RazorpayPayment(
       parseFloat(totalCost),
       "INR",
-      async (paymentId: unknown) => {
+      async () => {
         try {
-          const response = await axios.post(
+          const updateResponse = await axios.post(
             "http://localhost:5000/api/products/update-quantities",
             {
               items: cart.map((item) => ({
@@ -103,20 +104,52 @@ const CartPage: React.FC = () => {
             }
           );
 
-          if (response.status === 200) {
-            alert(`Payment successful! ID: ${paymentId}`);
-            localStorage.removeItem("cart");
-            navigate("/");
-            setCart([]);
+          if (updateResponse.status === 200) {
+            const userId = localStorage.getItem("userId");
+            const userName = localStorage.getItem("name");
+
+            console.log("User data from localStorage:", { userId, userName });
+
+            const orderData = {
+              userId,
+              userName,
+              items: cart.map((item) => ({
+                name: item.title,
+                quantity: item.quantity,
+              })),
+              billAmount: parseFloat(totalCost),
+            };
+
+            console.log("Sending order data:", orderData);
+
+            const orderResponse = await axios.post(
+              "http://localhost:5000/api/orders",
+              orderData
+            );
+
+            if (orderResponse.status === 201) {
+              alert(
+                `Payment successful! Order ID: ${orderResponse.data.order.orderId}`
+              );
+              localStorage.removeItem("cart");
+              navigate("/");
+              setCart([]);
+            } else {
+              setPaymentError(
+                "Failed to create order. Please contact support."
+              );
+            }
           } else {
             setPaymentError(
               "Failed to update product quantities. Please contact support."
             );
           }
-        } catch (error) {
-          console.error("Error updating product quantities:", error);
+        } catch (error: any) {
+          console.error("Error processing order:", error);
+          console.error("Error response:", error.response?.data);
           setPaymentError(
-            "Failed to update product quantities. Please contact support."
+            error.response?.data?.message ||
+              "Failed to process order. Please contact support."
           );
         }
       },

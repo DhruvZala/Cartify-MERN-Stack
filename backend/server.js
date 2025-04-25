@@ -4,6 +4,7 @@ const connectDB = require("./db");
 const productRoutes = require("./routes/products");
 const authRoutes = require("./routes/auth");
 const adminRoutes = require("./routes/admin");
+const orderRoutes = require("./routes/orderRoutes");
 
 const app = express();
 
@@ -38,6 +39,7 @@ app.get("/", (req, res) => {
 app.use("/api/products", productRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
+app.use("/api/orders", orderRoutes);
 
 // Handle 404 routes
 app.use((req, res) => {

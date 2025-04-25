@@ -16,6 +16,7 @@ const Navbar: React.FC<NavbarProps> = ({ cartCount }) => {
     localStorage.removeItem("email");
     localStorage.removeItem("name");
     localStorage.removeItem("password");
+    localStorage.removeItem("userId");
     navigate("/");
     document.cookie = "jwtToken=;  path=/;";
     window.location.reload();

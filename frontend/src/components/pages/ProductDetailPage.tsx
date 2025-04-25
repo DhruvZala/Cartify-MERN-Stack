@@ -110,6 +110,8 @@ const ProductDetailPage: React.FC = () => {
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
+            width="64"
+            height="64"
           >
             <path
               strokeLinecap="round"
