@@ -65,7 +65,7 @@ const ProductPage: React.FC = () => {
   const handleProductClick = (e: React.MouseEvent) => {
     if (!isLoggedIn) {
       e.preventDefault();
-      alert("Please login / register to view product details.");
+      alert("Please login or register to view product details.");
       navigate("/login");
     }
   };
