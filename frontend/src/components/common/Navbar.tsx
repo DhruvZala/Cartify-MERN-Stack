@@ -45,7 +45,7 @@ const Navbar: React.FC<NavbarProps> = ({ cartCount }) => {
             <div className="flex gap-1 text-xs sm:text-sm md:text-base">
               {isLoggedIn ? (
                 <>
-                  <Link to="UserDetail" className="font-medium text-gray-700 hover:text-blue-600 transition-colors duration-200 px-2 py-1 rounded-md hover:bg-blue-50 cursor-pointer">
+                  <Link to="/userDetail" className="font-medium text-gray-700 hover:text-blue-600 transition-colors duration-200 px-2 py-1 rounded-md hover:bg-blue-50 cursor-pointer">
                     {userName || userEmail}
                   </Link>
                   <span className="text-gray-300">|</span>
