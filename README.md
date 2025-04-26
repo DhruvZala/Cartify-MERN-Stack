@@ -82,8 +82,8 @@ npm install
    - Add the following variables:
    ```
    PORT=3000
-   MONGODB_URI=your_mongodb_uri
-   JWT_SECRET=your_jwt_secret
+   MONGODB_URI=mongodb+srv://dhruvlaptop11:Dhruvzala@2001@user-data.v76f8hf.mongodb.net/?retryWrites=true&w=majority&appName=User-Data
+   JWT_SECRET=cartifySecret
    ```
 
 4. Start the development servers
