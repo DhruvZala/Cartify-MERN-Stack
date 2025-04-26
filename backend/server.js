@@ -5,6 +5,7 @@ const productRoutes = require("./routes/products");
 const authRoutes = require("./routes/auth");
 const adminRoutes = require("./routes/admin");
 const orderRoutes = require("./routes/orderRoutes");
+require('dotenv').config();
 
 const app = express();
 
@@ -48,7 +49,7 @@ app.use((req, res) => {
 
 // Start server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running on port ${PORT}`);
   console.log(`Server URL: http://localhost:${PORT}`);
 });
